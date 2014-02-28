@@ -10,6 +10,14 @@
     <title>{% block title %}Default title{% end %}</title>
   </head>
   <body>
+    <div class="menu">
+      <div>
+        <ul>
+            <li><a href='/'>To menu</a></li>
+            <li><a href='#' id='btn_logout'>logout<a></li>
+        </ul>
+      </div>
+    </div>
     <div class='content'>
       {% block content %}
       {% end %}

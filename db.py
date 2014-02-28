@@ -32,6 +32,7 @@ class DB:
                 parent = item['parent_id']
             result_item["parent"] = parent
             result_item["text"] = item["data"]["name"]
+            result_item['data'] = item["data"]
             l.append(result_item)
         return l
 

@@ -11,7 +11,19 @@
 {% end %}
 
 {% block content %}
- <div id="tree"><div>
+<div id='leftside' class="sidebox">
+    <div class='caption'>{% block leftCaption %}<span>List of items</span>{% end %}</div>
+    <div id="tree"></div>
+ </div>
+ <div id='rightside' class="sidebox">
+    <div class='caption'>{% block rightCaption %}<span>List</span>{% end %}</div>
+    <div class='data'>
+        <div id="items_data">
+            
+        </div>
+
+    </div>
+ </div>
 {% end %}
     
 
