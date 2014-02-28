@@ -1,0 +1,17 @@
+
+{% extends "base.html" %}
+
+{% block css %} 
+<link rel="stylesheet" href="{{static_url('plugins/tree/themes/default/style.min.css')}}" />
+{% end %}
+
+{% block scripts %}
+<script src="{{static_url('plugins/tree/jstree.min.js')}}"></script>
+<script src="{{static_url('js/tree.js')}}"></script>
+{% end %}
+
+{% block content %}
+ <div id="tree"><div>
+{% end %}
+    
+
