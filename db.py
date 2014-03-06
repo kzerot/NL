@@ -28,7 +28,7 @@ class DB:
             result_item = {}
             result_item["id"] = item['id']
             parent = '#'
-            if item['parent_id'] and item["parent_id"]!="":
+            if item['parent_id'] and item["parent_id"] != "":
                 parent = item['parent_id']
             result_item["parent"] = parent
             result_item["text"] = item["data"]["name"]
