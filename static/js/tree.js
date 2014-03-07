@@ -1,3 +1,10 @@
+var _OPTION = "<div class='option_field'><span>{0}</span><input value='{1}'></div>";
+var _OPTION_CHILD = "<div class='option_field option_child'><span>{0}</span><input value='{1}'><div class='delete' {2}</div>";
+
+function deleteItem(id){
+    alert("delete item " + id);
+}
+
 $(function () { 
     $('#tree')
     .on('changed.jstree', function (e, data) {
@@ -6,14 +13,29 @@ $(function () {
           r.push(data.instance.get_node(data.selected[i]));
         }
         r = data.instance.get_node(data.selected[data.selected.length - 1])
-        console.log(r);
-
-        $('#items_data').html('');
-        for (var item in r.data) {
-            var key = item;
-            var value = r.data[item]
-            $('#items_data').append('<div>' + key + ': ' + value+'</div>')
-        };
+        req = { "itemId": r.id };
+        //console.log(r);
+        $.ajax({
+              url: "/getitems",
+              type: "POST",
+              data: JSON.stringify(req),
+              dataType: "json",
+            })
+          .done(function( itemData ) {
+            $('#items_data').html('');
+            console.log(itemData);
+            for (var item in itemData.data) {
+                var key = item;
+                var value = itemData.data[item];
+                var formatter = _OPTION;
+                var script = "";
+                if(key in itemData.init_data){
+                    formatter = _OPTION_CHILD;
+                    script = "onclick='deleteItem({0})'".format(r.id);
+                }
+                $('#items_data').append(formatter.format(key, item, script));
+            };
+          });
       })
     .jstree({
         'core' : {

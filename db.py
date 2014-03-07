@@ -10,11 +10,13 @@ class DB:
 
     def uniGet(self, id, table):
         cur = self.conn.cursor()
-        query = "select get_object('%s', %d)" % (table, id)
+        query = '''select get_object('%s', %d) as data,
+                data as init_data from %s where id = %d''' \
+                % (table, id, table, id)
         cur.execute(query)
         res = cur.fetchone()
         cur.close()
-        return res
+        return {"data": res['data'], "init_data": res["init_data"]}
 
     def uniGetAllWeb(self, table):
         cur = self.conn.cursor()
@@ -37,7 +39,7 @@ class DB:
         return l
 
     def getItem(self, id):
-        return self.uniGet('items')
+        return self.uniGet(id, 'items')
 
     def getItemsAll(self):
         return self.uniGetAll('items')
