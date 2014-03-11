@@ -29,11 +29,11 @@ $(function () {
                 var value = itemData.data[item];
                 var formatter = _OPTION;
                 var script = "";
-                if(key in itemData.init_data){
+                if(!(key in itemData.init_data)){
                     formatter = _OPTION_CHILD;
                     script = "onclick='deleteItem({0})'".format(r.id);
                 }
-                $('#items_data').append(formatter.format(key, item, script));
+                $('#items_data').append(formatter.format(key, value, script));
             };
           });
       })
