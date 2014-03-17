@@ -61,16 +61,16 @@ class App():
     class JsonHandler(BaseHandler):
         @tornado.web.authenticated
         def post(self):
-            print("REQUEST", self.request)
-            print("CONTENT", self.request.body)
             data = tornado.escape.json_decode(self.request.body)
             d = {}
-            if("id" in data):
+            if "delete" in data:
+                pass
+            if "id" in data:
                 d = self.db.getItemsAllWeb()
-                print (d)
+                print(d)
             elif "itemId" in data:
                 d = self.db.getItem(data["itemId"])
-                print (d)
+                print(d)
             self.set_header("Content-Type", "application/json")
             self.content_type = 'application/json'
 

@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2.extras import DictCursor
-
+from collections import OrderedDict
 
 class DB:
     def __init__(self):
@@ -16,6 +16,8 @@ class DB:
         cur.execute(query)
         res = cur.fetchone()
         cur.close()
+        res['data'] = OrderedDict(sorted(res['data'].items(),
+                                  key=lambda t: t[0]))
         return {"data": res['data'], "init_data": res["init_data"]}
 
     def uniGetAllWeb(self, table):
@@ -46,3 +48,28 @@ class DB:
 
     def getItemsAllWeb(self):
         return self.uniGetAllWeb('items')
+
+    def deleteItem(self, itemId, node, table="items"):
+        cur = self.conn.cursor()
+        query = '''select data from %s where id = %d''' \
+                % (table, itemId)
+        cur.execute(query)
+        res = cur.fetchone()
+        #cur.close()
+        json = res["data"]
+        if node in json:
+            del json[node]
+
+        query = '''update %s set data=%s where id = %s'''
+        cur = self.conn.cursor()
+        cur.execute(query, (table, json, itemId))
+        cur.close()
+        return True
+
+    def updateItem(self, itemId, json, table="items"):
+        cur = self.conn.cursor()
+        query = '''update %s set data=%s where id = %s'''
+        cur = self.conn.cursor()
+        cur.execute(query, (table, json, itemId))
+        cur.close()
+        return True
