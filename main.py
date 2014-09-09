@@ -48,6 +48,11 @@ class App():
         def get(self):
             self.render("baseitems.html")
 
+    class SkillsHandler(BaseHandler):
+        @tornado.web.authenticated
+        def get(self):
+            self.render("skillsitems.html")
+
     class NpsHandler(BaseHandler):
         @tornado.web.authenticated
         def get(self):
@@ -63,14 +68,30 @@ class App():
         def post(self):
             data = tornado.escape.json_decode(self.request.body)
             d = {}
+            print("in", data)
+            table = data['table']
+            if "delete_prop" in data:
+                if "itemId" in data and "node" in data:
+                    self.db.deleteProp(data["itemId"], data["node"])
+                    d = self.db.uniGet(data["itemId"], table)
             if "delete" in data:
-                pass
-            if "id" in data:
-                d = self.db.getItemsAllWeb()
+                if "itemId" in data:
+                    d = self.db.deleteItem(data["itemId"], table)
+            elif "add" in data:
+                if "name" in data:
+                    itemId = None
+                    if "itemId" in data:
+                        itemId = data["itemId"]
+                    d = self.db.addItem(itemId, data["name"], table)
                 print(d)
+            elif "save" in data:
+                if "itemId" in data and "data" in data:
+                    self.db.updateItem(data["itemId"], data["data"], table)
+                    d = {'result': True}
+            elif "id" in data:
+                d = self.db.uniGetAllWeb(table)
             elif "itemId" in data:
-                d = self.db.getItem(data["itemId"])
-                print(d)
+                d = self.db.uniGet(data["itemId"], table)
             self.set_header("Content-Type", "application/json")
             self.content_type = 'application/json'
 
@@ -83,6 +104,7 @@ class App():
             (r"/quests", self.QuestHandler),
             (r"/login", self.LoginHandler),
             (r"/items", self.ItemsHandler),
+            (r"/skills", self.SkillsHandler),
             (r"/nps", self.NpsHandler),
             (r'/css/^(.*)', tornado.web.StaticFileHandler,
                 {'path': '/css'},),

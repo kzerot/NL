@@ -5,15 +5,27 @@
 <link rel="stylesheet" href="{{static_url('plugins/tree/themes/default/style.min.css')}}" />
 {% end %}
 
+
 {% block scripts %}
+{% block custom_scripts %}
+<script>
+    var table = 'items';
+</script>
+{% end %}
 <script src="{{static_url('plugins/tree/jstree.min.js')}}"></script>
 <script src="{{static_url('js/tree.js')}}"></script>
 {% end %}
 
 {% block content %}
 <div id='leftside' class="sidebox">
-    <div class='caption'>{% block leftCaption %}<span>List of items</span>{% end %}</div>
+    <div class="caption_header">
+        <div class='caption'>{% block leftCaption %}<span>List of items</span>{% end %}</div>
+        <div class="button" id="btn_add_base">Add base item</div>
+        <div class="button" id="btn_refresh">Refresh</div>
+    </div>
+    <div class="scrollcontainer">
     <div id="tree"></div>
+    </div>
  </div>
  <div id='rightside' class="sidebox">
     <div class='caption'>{% block rightCaption %}<span>List</span>{% end %}</div>
@@ -21,8 +33,21 @@
         <div id="items_data">
             
         </div>
-
+        <div class="button" id="btn_add">Add property</div>
+        <div class="button" id="btn_save">Save</div>
+        <div class="button" id="btn_del_all">Delete item</div>
     </div>
+ </div>
+ <div id="input_dialog" title="Input name">
+  <form>
+    <fieldset>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="New Item" class="text ui-widget-content ui-corner-all">
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
  </div>
 {% end %}
     

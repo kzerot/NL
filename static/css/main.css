@@ -16,15 +16,25 @@ a:hover{
     margin: auto;
 }
 
-#leftside{
+div#leftside{
     width: 300px;
     float: left;
     margin: 5px;
-    padding: 10px;
+    padding: 10px;padding-top: 70px;
     min-height: 400px;
+    height: 80%;
 }
 
-#rightSide{
+div.scrollcontainer{
+    height:100%;
+    overflow-y: auto;
+    padding-right:0px;
+    margin-right:20px;
+    margin-top:0;
+    margin-bottom:0;
+}
+
+div#rightSide{
     float: left;
     width: 500px;
     margin: 5px;
@@ -32,7 +42,7 @@ a:hover{
     min-height: 400px;
 }
 
-.sidebox{
+div.sidebox{
     border: 1px #CDCFD8 solid;
     -webkit-border-radius: 10px;
     -webkit-border-top-right-radius: 30px;
@@ -50,15 +60,15 @@ a:hover{
 }
 
 
-.menu {
+div.menu {
     height: 50px;
 }
-.menu div {
+div.menu div {
     position: fixed;
     right: 20px;
 }
 
-.menu ul{
+div.menu ul{
     list-style: none;
     display: inline-block;
 }
@@ -84,7 +94,7 @@ a:hover{
 }
 
 .option_field span, .option_field input[type=text]{
-    width: 50px;
+    width: 150px;
     display: inline-block;
     border: 2px grey solid;
     padding: 1px;
@@ -102,15 +112,103 @@ a:hover{
 }
 
 .option_field input[type=text] {
-    width: 200px;
+    width: 250px;
 
     height: 26px;
 }
 
-div.delete{
+div.icon{
     width: 20px;
     height: 20px;
-    background-color: black;
     display: inline-block;
     vertical-align: middle;
+    background: no-repeat 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    cursor: pointer;
+}
+div.delete{
+    background-image: url('../images/delete.png');
+}
+div.undo{
+    background-image: url('../images/undo.png');
+}
+
+
+.caption {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.caption_header{
+    height: 70px;
+    position: absolute;
+    top: 68;
+    width: 270px;
+}
+
+
+/* button */
+
+.button {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc782), color-stop(1, #db8b29) );
+	background:-moz-linear-gradient( center top, #ffc782 5%, #db8b29 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc782', endColorstr='#db8b29');
+	background-color:#ffc782;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topleft:5px;
+	border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	-moz-border-radius-topright:5px;
+	border-top-right-radius:5px;
+	-webkit-border-bottom-right-radius:5px;
+	-moz-border-radius-bottomright:5px;
+	border-bottom-right-radius:5px;
+	-webkit-border-bottom-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	border-bottom-left-radius:5px;
+	text-indent:0px;
+	border:1px solid #ab8748;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Times New Roman;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:19px;
+	line-height:19px;
+	min-width:85px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:2px -1px 7px #805b20;
+	padding-left: 3px;
+	padding-right:3px;
+	cursor:pointer;
+}
+.button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #db8b29), color-stop(1, #ffc782) );
+	background:-moz-linear-gradient( center top, #db8b29 5%, #ffc782 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#db8b29', endColorstr='#ffc782');
+	background-color:#db8b29;
+}.button:active {
+	position:relative;
+	top:1px;
+}
+
+/* jquery */
+div.ui-widget{
+    font-size: 12px;
+}
+
+fieldset{
+  border:none;
+}
+div.ui-widget-overlay{
+    background-color: #555;
+    background-image: none;
 }
